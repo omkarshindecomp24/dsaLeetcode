@@ -4,11 +4,9 @@ class Solution {
         List<List<Integer>> ls = new ArrayList<>();
         Arrays.sort(nums);
         for (int i = 0; i < nums.length && nums[i]<=0; i++) {
+          if( i!=0 && nums[i]==nums[i-1])continue;
             twosum(nums, i, -nums[i], ls,hs);
         }
-        // for (List<Integer> x : hs) {
-        //     ls.add(x);
-        // }
         return ls;
 
     }
@@ -18,15 +16,16 @@ class Solution {
         int st = i + 1;
 
         while (st < end) {
+             
             if (nums[st] + nums[end] == target) {
                 ArrayList<Integer> al = new ArrayList<>();
                 al.add(nums[i]);
                 al.add(nums[st]);
                 al.add(nums[end]);
-
-             if(!hs.contains(al)) {  ls.add(al);
-             hs.add(al);
-             }
+              //  ls.add(al);
+              if(!hs.contains(al)) {  ls.add(al);
+              hs.add(al);
+               }
                 st++;
                 end--;
                 continue;
@@ -36,6 +35,7 @@ class Solution {
             } else {
                 st++;
             }
+           
         }
 
         return;
