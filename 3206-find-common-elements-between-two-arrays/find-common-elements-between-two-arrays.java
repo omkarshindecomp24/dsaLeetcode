@@ -7,14 +7,13 @@ class Solution {
             hm.put(x,hm.getOrDefault(x,0)+1);
         }
           for(int x:nums2){
-            hm2.put(x,hm2.getOrDefault(x,0)+1);
-        }
-        for(int x:hm.keySet()){
-            if(hm2.containsKey(x)){
-                count1+=hm.get(x);
-                count2+=hm2.get(x);
-            }
+           if(hm.containsKey(x)){
+            count1+=hm.get(x);
+            hm.put(x,0);
+            count2++;
+           }
         }
         return new int[]{count1,count2};
     }
+       
 }
