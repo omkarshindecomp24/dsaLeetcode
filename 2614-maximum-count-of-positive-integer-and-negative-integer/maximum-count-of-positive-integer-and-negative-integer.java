@@ -1,33 +1,32 @@
 class Solution {
     public int maximumCount(int[] nums) {
-        
-       int low=0;
-       int high=nums.length-1;
-       int n=nums.length,mid=-1,k=n;
 
-       while(low<=high){
-          mid=low+(high-low)/2;
-          if(nums[mid]>0){
-            k=mid;
-            high=mid-1;
-          }else if(nums[mid]<=0){
-            low=mid+1;
-          }
+        int low = 0;
+        int high = nums.length - 1;
+        int n = nums.length, mid = -1, k = n, p = -1;
+        boolean b = false;
 
-       }
-       if(k>-1 && k<n){
-       int t=n-k;
-        while(k>-1 && k<n && nums[k]>=0){
-            k--;
+        while (low <= high) {
+            mid = low + (high - low) / 2;
+            if (nums[mid] > 0) {
+                k = mid;
+                high = mid - 1;
+            } else if (nums[mid] <= 0) {
+                low=mid+1;
+            }
         }
-        return Math.max(k+1,t);
-       }else{
-       int t=0;
-        k=n-1;
-        while(k>-1 && k<n && nums[k]>=0){
-            k--;
+          low=0;
+          high=n-1;
+        while (low <= high) {
+            mid = low + (high - low) / 2;
+            if (nums[mid] < 0) {
+                p = mid;
+                low = mid + 1;
+            } else if (nums[mid] >= 0) {
+                high=mid-1;
+            }
         }
-        return Math.max(k+1,t);
-       }
-       }
+
+        return Math.max(p+1 ,n-k);
+    }
 }
