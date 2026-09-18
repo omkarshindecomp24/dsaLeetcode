@@ -1,29 +1,22 @@
 class Solution {
     public int search(int[] nums, int target) {
-
         int low = 0;
         int high = nums.length - 1, mid = 0, k = -1;
-        while (low <high) {
+        while (low < high) {
             mid = low + (high - low) / 2;
-            if (nums[low] <=nums[mid] && nums[mid] <=nums[high]) {
+            if (nums[low] <= nums[mid] && nums[mid] <= nums[high]) {
                 k = low;
-                // if(low==mid&& mid==high)k=low+1;
                 break;
             } else {
-                if (nums[low] <=nums[mid] && nums[mid] >=nums[high]) {
-                    low = mid+1 ;
-                } else if (nums[low] >=nums[mid] && nums[mid] <= nums[high]) {
-                    high = mid ;
+                if (nums[low] <= nums[mid] && nums[mid] >= nums[high]) {
+                    low = mid + 1;
+                } else if (nums[low] >= nums[mid] && nums[mid] <= nums[high]) {
+                    high = mid;
                 }
             }
         }
-
-        // while (k != 0 && nums[k - 1] < nums[k]) {
-        //     k--;
-        // }
-        int t = k;
-        low =  k==-1?Math.max(low,high):k;
-        t=low;
+       // low = low: k;
+      int  t = low;
         k = -1;
         high = nums.length - 1;
         while (low <= high) {
