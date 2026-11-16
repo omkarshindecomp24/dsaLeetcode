@@ -12,10 +12,10 @@ class Solution {
             st.push(i);
         }
         for (int i = 0; i < nums.length - k + 1; i++) {
-            int j = i, range = i + k-1;
+            int j = i, range = i + k;
             boolean bl = true;
-            while (j <= range && j < n) {
-                if (r[j] > range) {
+            while (j < range && j < n) {
+                if (r[j] >= range) {
                     ans[i] = nums[j];
                     break;
                 } else {
