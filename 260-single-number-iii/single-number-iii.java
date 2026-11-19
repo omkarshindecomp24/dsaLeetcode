@@ -1,30 +1,19 @@
 class Solution {
     public int[] singleNumber(int[] nums) {
         int k=0;
-        HashSet<Integer> hs=new HashSet<>();
-        for( int x:nums){
-            k=(k^x);
-        }
         for(int x:nums){
-            int z=x^k;
-            if(!hs.contains(z)){ 
-                    hs.add(z);
+            k^=x;
+        }
+        int h=((k&(k-1))^k);
+        int c=0;
+        int d=0;
+        for(int x:nums){
+            if((x&h)==0){
+                c^=x;
             }else{
-                hs.remove(z);
+                d^=x;
             }
         }
-        int count=0;
-        int [] ans=new int[2];
-        for(int x:hs){
-           if(count==0){
-            ans[0]=x^k;
-            count++;
-
-           }else{
-            ans[1]=x^k;
-           }
-            
-        }
-        return ans;
+        return new int[]{c,d};
     }
 }
