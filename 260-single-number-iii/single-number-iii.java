@@ -1,23 +1,30 @@
 class Solution {
     public int[] singleNumber(int[] nums) {
-        Arrays.sort(nums);
-        int a = 0, b = 0, count = 0;
-        boolean bl = true;
-        for (int i = 0; i < nums.length - 1; i++) {
-            if (bl && nums[i] != nums[i + 1] && (i == 0 || nums[i] != nums[i - 1])) {
-                a = nums[i];
-                bl = false;
-                count++;
-                continue;
-            }
-            if (!bl && nums[i] != nums[i + 1] && (i == 0 || nums[i] != nums[i - 1])) {
-                b = nums[i];
-                count++;
+        int k=0;
+        HashSet<Integer> hs=new HashSet<>();
+        for( int x:nums){
+            k=(k^x);
+        }
+        for(int x:nums){
+            int z=x^k;
+            if(!hs.contains(z)){ 
+                    hs.add(z);
+            }else{
+                hs.remove(z);
             }
         }
-        if (count == 1) {
-            b = nums[nums.length - 1];
+        int count=0;
+        int [] ans=new int[2];
+        for(int x:hs){
+           if(count==0){
+            ans[0]=x^k;
+            count++;
+
+           }else{
+            ans[1]=x^k;
+           }
+            
         }
-        return new int[] { a, b };
+        return ans;
     }
 }
