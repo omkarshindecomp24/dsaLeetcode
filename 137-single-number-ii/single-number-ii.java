@@ -1,24 +1,17 @@
 class Solution {
     public int singleNumber(int[] nums) {
-        HashSet<Integer> hs=new HashSet<>();
-        HashSet<Integer> hs2=new HashSet<>();
-         for(int x:nums){
-              if(hs2.contains(x)){
-                continue;
+        int count = 0, ans = 0;
+        for (int i = 0; i < 32; i++) {
+            count=0;
+            for (int x : nums) {
+                if ((x & (1 << i)) != 0) {
+                    count++;
+                }
             }
-            if(hs.contains(x)  ){
-                hs.remove(x);
-                hs2.add(x);
-
-            }else{
-                hs.add(x);
+            if (count % 3 != 0) {
+                ans |= (1 << i);
             }
-
-          
-         }
-         for(int x:hs){
-            return x;
-         }
-         return 0;
+        }
+        return ans;
     }
 }
